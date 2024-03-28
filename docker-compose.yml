@@ -5,13 +5,30 @@ services:
     build:
       context: python/3.11
       dockerfile: Dockerfile
+      args:
+        # GLAB_DISTR_ARCH:
+        # - arm
+        # - arm64
+        # - i386
+        # - x86_64
+        GLAB_DISTR_ARCH: ${GLAB_DISTR_ARCH:-x86_64}
+        GLAB_DISTR_VERSION: ${GLAB_DISTR_VERSION:-1.22.0}
+        # GH_DISTR_ARCH:
+        # - 386
+        # - amd64
+        # - arm64
+        # - armv6
+        GH_DISTR_ARCH: ${GH_DISTR_ARCH:-amd64}
+        GH_DISTR_VERSION: ${GH_DISTR_VERSION:-2.46.0}
+        USERNAME: ${USERNAME:-nett00n}
     environment:
       UID: 1000
       GUID: 100
     volumes:
-      - /home/nett00n/:/home/nett00n
+      - /home/${USERNAME:-nett00n}/:/home/${USERNAME:-nett00n}
       - /etc/sudoers:/etc/sudoers:ro
       - /var/run/docker.sock:/var/run/docker.sock
-    working_dir: /home/nett00n/personal-env/
+    working_dir: /home/${USERNAME:-nett00n}/personal-env/
     ports:
-      - 2022:22
+      - ${PUBLIC_PORT:-2022}:22
+
