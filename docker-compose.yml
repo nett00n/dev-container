@@ -1,0 +1,17 @@
+---
+version: "3"
+services:
+  personal-env:
+    build:
+      context: python/3.11
+      dockerfile: Dockerfile
+    environment:
+      UID: 1000
+      GUID: 100
+    volumes:
+      - /home/nett00n/:/home/nett00n
+      - /etc/sudoers:/etc/sudoers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    working_dir: /home/nett00n/personal-env/
+    ports:
+      - 2022:22
