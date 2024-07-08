@@ -21,14 +21,17 @@ services:
         GH_DISTR_ARCH: ${GH_DISTR_ARCH:-amd64}
         GH_DISTR_VERSION: ${GH_DISTR_VERSION:-2.46.0}
         USERNAME: ${USERNAME:-nett00n}
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
     environment:
-      UID: 1000
-      GUID: 100
+      UID: ${UID:-1000}
+      GID: ${GID:-1000}
     volumes:
       - /home/${USERNAME:-nett00n}/:/home/${USERNAME:-nett00n}
-      - /etc/sudoers:/etc/sudoers:ro
+        #      - /etc/sudoers:/etc/sudoers:ro
       - /var/run/docker.sock:/var/run/docker.sock
+      - /Stacks/:/Stacks
     working_dir: /home/${USERNAME:-nett00n}/personal-env/
     ports:
       - ${PUBLIC_PORT:-2022}:22
-
+    restart: always
