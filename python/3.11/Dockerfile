@@ -35,5 +35,6 @@ RUN apt-get update -qq \
     && rm -rf /var/cache/apt/archives/
 RUN adduser ${USERNAME} -uid ${UID} --shell /bin/bash
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN sudo usermod -aG docker ${USERNAME}
 CMD sh /entrypoint.sh
 WORKDIR /home/${USERNAME}
